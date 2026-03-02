@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>5 Years - Anniversary Review 😏💖</title>
+
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fffefe;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.quiz-box {
+    background: rgb(255, 255, 255);
+    color: #000000;
+    padding: 25px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #faecec, #ffe1e1);
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: rgb(255, 255, 255);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    animation: pop 0.3s ease;
+    max-width: 320px;
+}
+
+.popup-content h3 {
+    margin: 0;
+    color: #000000;
+}
+
+.popup-content button {
+    margin-top: 15px;
+    background: #ecd1dc;
+}
+
+@keyframes pop {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<h1>5-Year Performance Review: Refund Not Available 😏❤️</h1>
+
+<div class="quiz-box">
+    <h2 id="question">Loading...</h2>
+    <div id="options"></div>
+</div>
+
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h3 id="popup-message"></h3>
+        <button onclick="closePopup()">Continue 💖</button>
+    </div>
+</div>
+
+<!-- Background Music -->
+<audio id="bg-music" loop>
+    <source src="Sarvam Maya - Puthu Mazha Song Bgm.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+const quiz = [ /* SAME QUIZ DATA HERE (no change) */ 
+{
+question: "Which month did we FIRST MEET after our proposal? 💍💕",
+options: ["April 🌸","August ☀️","September 🍁","June 🌼"],
+answer: "September 🍁"
+},
+{
+question: "Our first movie date? 🎬❤️",
+options: ["Ponniyin Selvan ⚔️","Love Today 💕","Don 😎","Rebel 🔥"],
+answer: "Love Today 💕"
+},
+{
+question: "How many times we visited KFC? 🍗😋",
+options: ["4","3","2","5"],
+answer: "3"
+},
+{
+question: "Which cake I mostly prefer? 🎂💖",
+options: ["Banana 🍌","Red Velvet ❤️","Black Forest 🍫","Chocolate 🍰"],
+answer: "Red Velvet ❤️"
+},
+{
+question: "Which part of you I love the most? 😌❤️",
+options: ["Eyebrows 😉","Forehead 😘","Neck 😍","Shoulder 💪"],
+answer: "Shoulder 💪"
+},
+{
+question: "When did we exchange our contact number first? 📱💕",
+options: ["March 1","March 2","March 3","March 4"],
+answer: "March 3"
+},
+{
+question: "Which phrase that you call me I like most? 🥺💞",
+options: ["Baby 😘","Ammu 🥰","Hey You 😏","Madam 😂"],
+answer: "Ammu 🥰"
+},
+{
+question: "Which date I like the most? 💕✨",
+options: ["Criffles 🧇","First Temple Date 🙏","First Movie Date 🎬","Tiruchendur 🌊"],
+answer: "Tiruchendur 🌊"
+},
+{
+question: "Who loves more? 😌❤️",
+options: ["You 😎","Me 🥰"],
+answer: "Me 🥰"
+},
+{
+question: "Will you marry me? 💍❤️",
+options: ["Yes 😍","No 💔"],
+answer: "Yes 😍"
+}
+];
+
+let current = 0;
+let musicStarted = false;
+
+function loadQuestion() {
+    document.getElementById("question").innerText = quiz[current].question;
+    const optionsDiv = document.getElementById("options");
+    optionsDiv.innerHTML = "";
+
+    quiz[current].options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.innerText = option;
+        btn.onclick = () => checkAnswer(option);
+        optionsDiv.appendChild(btn);
+    });
+}
+
+function showPopup(message){
+    document.getElementById("popup-message").innerText = message;
+    document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display = "none";
+}
+
+function startMusicOnce() {
+    if (!musicStarted) {
+        document.getElementById("bg-music").play();
+        musicStarted = true;
+    }
+}
+
+function checkAnswer(selected) {
+
+    startMusicOnce();
+
+    const correct = quiz[current].answer;
+
+    if(selected === correct){
+        showPopup("Love uu bby 💕😍");
+        current++;
+
+        if(current < quiz.length){
+            setTimeout(loadQuestion, 700);
+        } else {
+            setTimeout(() => {
+                document.getElementById("question").innerText =
+                "Happy Anniversary bby 😍💖✨";
+                document.getElementById("options").innerHTML = "";
+            }, 700);
+        }
+
+    } else {
+
+        if(current === 8 || current === 9){
+            showPopup("Invalid 😏 Try other option 💕");
+        } else {
+            showPopup("I’ll kill you after the test 😈");
+        }
+    }
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
